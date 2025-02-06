@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Berita;
+use App\Models\berita;
 use App\Models\form_pendaftaran;
 use App\Models\galeri;
 use App\Models\guru;
