@@ -3,13 +3,18 @@
 @section('content')
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Daftar Berita</h1>
+        <h1 class="h2">Daftar Berita</h1>    
         <div class="btn-toolbar mb-2 mb-md-0">
             <a href="{{ route('berita.create') }}" class="btn btn-sm btn-outline-primary">Tambah Berita</a>
         </div>
     </div>
-
-    <h2>Daftar Berita</h2>
+    <div class="d-flex justify-content-between mb-2">
+        <h2>Daftar Berita</h2>
+        <form action="{{ route('berita.index') }}" method="GET" class="d-flex">
+            <input type="text" name="q" class="form-control me-2" placeholder="Cari berdasarkan judul..." value="{{ request('q') }}">
+            <button type="submit" class="btn btn-outline-success">Cari</button>
+        </form>
+    </div>
     <div class="table-responsive">
         <table class="table table-striped table-bordered table-hover">
             <thead class="table-success">
@@ -50,6 +55,9 @@
                 @endforelse
             </tbody>
         </table>
+        <div class="d-flex justify-content-center mt-3">
+            {{ $data->links('pagination::simple-bootstrap-4') }}
+        </div>
     </div>
 </main>
 @endsection

@@ -127,7 +127,7 @@
                         <ul>
                             <li><i class="bx bx-chevron-right"></i> <a href="/galeri">Galery Foto</a></li>
                             <li><i class="bx bx-chevron-right"></i> <a href="/alamat">Alamat Kami</a></li>
-                            <img src="{{ asset('img/logo_ABA.JPG') }}" width="130">
+                            <img src="{{ asset('img/logo_aba.png') }}" width="130">
                         </ul>
                     </div>
 

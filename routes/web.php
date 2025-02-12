@@ -12,17 +12,13 @@ use App\Http\Controllers\SesiController;
 use App\Http\Controllers\NewsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PrestasiController;
-use App\Models\form_pendaftaran;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
+| Rute utama untuk guest dan admin.
 |
 */
 
@@ -39,10 +35,21 @@ Route::get('/daftar_guru', [GuestController::class, 'daftar_guru']);
 Route::get('/daftar_kelas', [GuestController::class, 'daftar_kelas']);
 Route::get('/alamat', [GuestController::class, 'alamat']);
 
-Route::get('/berita', [NewsController::class, 'index']);
-Route::get('/berita/{id}', [NewsController::class, 'show'])->name('berita.tampil');
+/*
+|--------------------------------------------------------------------------
+| Route Berita untuk Pengunjung (Guest)
+|--------------------------------------------------------------------------
+| Berita dapat diakses oleh pengunjung umum
+*/
+Route::get('/berita', [NewsController::class, 'index'])->name('berita.index');
 Route::get('/berita/cari', [NewsController::class, 'search'])->name('berita.cari');
+Route::get('/berita/{slug}', [NewsController::class, 'show'])->name('berita.tampil'); // Pakai slug
 
+/*
+|--------------------------------------------------------------------------
+| Route untuk Login & Logout
+|--------------------------------------------------------------------------
+*/
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [SesiController::class, 'index'])->name('login');
     Route::post('/login', [SesiController::class, 'login']);
@@ -51,13 +58,19 @@ Route::middleware(['guest'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/admin/home', [AdminController::class, 'index'])->name('admin.home');
     Route::get('/logout', [SesiController::class, 'logout']);
+
     Route::prefix('admin')->group(function () {
         Route::resource('prestasi', PrestasiController::class);
         Route::resource('mapel', MapelController::class);
         Route::resource('guru', GuruController::class);
         Route::resource('kelas', KelasController::class);
         Route::resource('link_form_pendaftaran', FormPendaftaranController::class);
-        Route::resource('berita', BeritaController::class);
+
+        // Route Berita untuk Admin
+        Route::resource('berita', BeritaController::class)->parameters([
+            'berita' => 'slug' // Gunakan slug, bukan ID
+        ]);
+
         Route::resource('galeri', GaleriController::class);
     });
 });

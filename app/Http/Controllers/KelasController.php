@@ -2,15 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Kelas;
+use App\Models\kelas;
 use Illuminate\Http\Request;
 
 class KelasController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // Mengambil semua data kelas
-        $data = Kelas::all();
+        $query = $request->input('q');
+        $data = Kelas::when($query, function ($queryBuilder) use ($query) {
+            return $queryBuilder->where('tahun_ajar', 'like', "%{$query}%")
+                                ->orWhere('class_name', 'like', "%{$query}%")
+                                ->orWhere('homeroom_teacher', 'like', "%{$query}%");
+        })->latest()->paginate(10);
+        
         return view('contents.admin.kelas.index', compact('data'));
     }
 

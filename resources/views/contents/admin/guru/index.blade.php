@@ -11,7 +11,15 @@
     </div>
   </div>
 
-  <h2>Daftar Guru</h2>
+  <!-- Form Pencarian -->
+  <div class="d-flex justify-content-between mb-2">
+    <h2>Daftar Guru</h2>
+    <form action="{{ route('guru.index') }}" method="GET" class="d-flex">
+      <input type="text" name="q" class="form-control me-2" placeholder="Cari guru ..." value="{{ request('q') }}">
+      <button type="submit" class="btn btn-outline-success">Cari</button>
+    </form>
+  </div>
+
   <div class="table-responsive">
     <table class="table table-striped table-bordered table-hover">
       <thead class="table-success">
@@ -28,9 +36,8 @@
       <tbody>
         @forelse ($data as $guru)
         <tr>
-          <td>{{ $loop->iteration }}</td>
+          <td>{{ $loop->iteration + ($data->currentPage() - 1) * $data->perPage() }}</td>
           <td>
-            <!-- Menampilkan gambar dengan menggunakan path yang sudah disimpan di database -->
             <img src="{{ asset($guru->pfp_path) }}" alt="Foto Profil" class="img-fluid"
             style="width: 50px; height: 50px; object-fit: cover;">
           </td>
@@ -54,6 +61,11 @@
         @endforelse
       </tbody>
     </table>
+  </div>
+
+  <!-- Pagination -->
+  <div class="d-flex justify-content-center mt-3">
+    {{ $data->links('pagination::simple-bootstrap-4') }}
   </div>
 </main>
 @endsection

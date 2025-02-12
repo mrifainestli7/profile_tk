@@ -8,11 +8,15 @@ use Illuminate\Http\Request;
 class PrestasiController extends Controller
 {
     /**
-     * Menampilkan daftar prestasi.
+     * Menampilkan daftar prestasi dengan pagination dan pencarian.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = Prestasi::all();
+        $query = $request->input('q');
+        $data = Prestasi::when($query, function ($queryBuilder) use ($query) {
+            return $queryBuilder->where('kategori_lomba', 'like', "%{$query}%");
+        })->latest()->paginate(10); // Menampilkan 10 data per halaman
+
         return view('contents.admin.prestasi.index', compact('data'));
     }
 
@@ -33,7 +37,7 @@ class PrestasiController extends Controller
             'prestasi' => 'required|string|max:255',
             'kategori_lomba' => 'required|string|max:255',
             'tingkat' => 'required|string|max:255',
-            'tanggal' => 'required|date',
+            'diraih' => 'required|date',
         ]);
 
         Prestasi::create($request->all());
@@ -58,12 +62,12 @@ class PrestasiController extends Controller
             'prestasi' => 'required|string|max:255',
             'kategori_lomba' => 'required|string|max:255',
             'tingkat' => 'required|string|max:255',
-            'tanggal' => 'required|date',
+            'diraih' => 'required|date',
         ]);
 
         $prestasi->update($request->all());
 
-        return redirect()->route('prestasi.index')->with('success', 'Prestasi berhasil diupdate.');
+        return redirect()->route('prestasi.index')->with('success', 'Prestasi berhasil diperbarui.');
     }
 
     /**

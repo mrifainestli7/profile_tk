@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Guru;
+use App\Models\guru;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -11,13 +11,17 @@ class GuruController extends Controller
     /**
      * Menampilkan daftar guru.
      */
-    public function index()
+    public function index(Request $request)
     {
-        // Mengambil semua data guru dari database
-        $data = Guru::all();
-
-        // Mengirimkan data guru ke view
+        $query = $request->input('q');
+        $data = Guru::when($query, function ($queryBuilder) use ($query) {
+            return $queryBuilder->where('nuptk', 'like', "%{$query}%")
+                                ->orWhere('name', 'like', "%{$query}%")
+                                ->orWhere('status', 'like', "%{$query}%");
+        })->latest()->paginate(10);
+        
         return view('contents.admin.guru.index', compact('data'));
+        
     }
 
     /**

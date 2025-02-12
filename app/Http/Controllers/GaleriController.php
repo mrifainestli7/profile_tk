@@ -7,12 +7,18 @@ use Illuminate\Http\Request;
 
 class GaleriController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $data = Galeri::all();
+        $query = $request->input('q');
+
+        $data = Galeri::when($query, function ($queryBuilder) use ($query) {
+            return $queryBuilder->where('foto_desc', 'like', "%{$query}%");
+        })->latest()->paginate(10);
+
         return view('contents.admin.galeri.index', compact('data'));
     }
-    
+
+
     public function create()
     {
         return view('contents.admin.galeri.create');
@@ -21,8 +27,8 @@ class GaleriController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'foto_path' => 'required|image|mimes:jpeg,jpg,png,webp|max:5120',  
-            'foto_desc' => 'required|string|max:255',     
+            'foto_path' => 'required|image|mimes:jpeg,jpg,png,webp|max:5120',
+            'foto_desc' => 'required|string|max:255',
         ]);
 
         if ($request->hasFile('foto_path')) {
@@ -36,7 +42,7 @@ class GaleriController extends Controller
         }
 
         Galeri::create([
-            'foto_path' => $imagePath, 
+            'foto_path' => $imagePath,
             'foto_desc' => $request->foto_desc,
         ]);
 
@@ -51,13 +57,13 @@ class GaleriController extends Controller
     public function update(Request $request, Galeri $galeri)
     {
         $request->validate([
-            'foto_path' => 'image|mimes:jpeg,jpg,png,webp|max:5120',  
-            'foto_desc' => 'required|string|max:255',     
+            'foto_path' => 'image|mimes:jpeg,jpg,png,webp|max:5120',
+            'foto_desc' => 'required|string|max:255',
         ]);
 
         if ($request->hasFile('foto_path')) {
             if ($galeri->foto_path != 'img/default_cover_berita.jpg' && file_exists(public_path($galeri->foto_path))) {
-                unlink(public_path( $galeri->foto_path));
+                unlink(public_path($galeri->foto_path));
             }
 
             $image = $request->file('foto_path');
@@ -70,14 +76,14 @@ class GaleriController extends Controller
         }
 
         $galeri->update([
-            'foto_path' => $imagePath, 
+            'foto_path' => $imagePath,
             'foto_desc' => $request->foto_desc,
         ]);
 
         // Redirect ke halaman daftar galeri dengan pesan sukses
         return redirect()->route('galeri.index')->with('success', 'galeri berhasil diupdate.');
     }
-    
+
     public function destroy(Galeri $galeri)
     {
         // Hapus gambar jika bukan default

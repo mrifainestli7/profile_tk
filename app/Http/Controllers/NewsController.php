@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Berita;
+use App\Models\berita;
 use Illuminate\Http\Request;
 
 class NewsController extends Controller
@@ -25,22 +25,22 @@ class NewsController extends Controller
         $beritas = Berita::where('judul', 'like', '%' . $keyword . '%')
             ->orWhereRaw("LOWER(REPLACE(konten, '<p>', '')) LIKE ?", ['%' . strtolower($keyword) . '%'])
             ->orderBy('created_at', 'desc')
-        ->paginate(4);
+            ->paginate(4);
 
         $beritaTerpopuler = Berita::orderBy('views', 'desc')->take(5)->get();
 
-        return view('contents.berita.index', compact('beritas', 'beritaTerpopuler'))->with('keyword', $keyword);
+        return view('contents.berita.cari_berita', compact('beritas', 'beritaTerpopuler'))->with('keyword', $keyword);
     }
 
-
-    public function show($id)
+    public function show($slug)
     {
-        $berita = Berita::findOrFail($id);
-        $berita->increment('views');
+        $berita = Berita::where('slug', $slug)->firstOrFail();
+        $berita->increment('views'); // Tambahkan view count
         $beritaTerpopuler = Berita::orderBy('views', 'desc')->limit(5)->get();
 
         return view('contents.berita.detail_berita', compact('berita', 'beritaTerpopuler'));
     }
+
 
     private function extractParagraphs($htmlContent)
     {

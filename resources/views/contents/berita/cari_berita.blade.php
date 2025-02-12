@@ -3,14 +3,11 @@
 @section('title', 'Berita Terbaru')
 
 @section('content')
-
-    @if (!empty($keyword))
-        <p class="text-muted">Menampilkan hasil pencarian untuk: <strong>{{ $keyword }}</strong></p>
-    @endif
-
     <div class="row">
         <div class="col-md-8">
-            <h2>Cari Berita</h2>
+            @if (!empty($keyword))
+                <h3 class="text-muted">Berita TK ABA Ngabean terkait {{ $keyword }} </h3>
+            @endif
             <div class="row">
                 @foreach ($beritas as $berita)
                     <div class="col-md-6">
@@ -22,7 +19,7 @@
                                     {{ \Carbon\Carbon::parse($berita->tanggal)->format('d M Y') }}</p>
                                 <h5 class="card-title">{{ $berita->judul }}</h5>
                                 <p class="card-text">{!! \Illuminate\Support\Str::limit($berita->konten, 150) !!}</p>
-                                <a href="{{ route('berita.tampil', $berita->id) }}" class="btn btn-success">Baca
+                                <a href="{{ route('berita.tampil', $berita->slug) }}" class="btn btn-success">Baca
                                     Selengkapnya</a>
                             </div>
                         </div>
@@ -38,7 +35,7 @@
             <ul class="list-group">
                 @foreach ($beritaTerpopuler as $populer)
                     <li class="list-group-item">
-                        <h5><a href="{{ route('berita.tampil', $populer->id) }}">{{ $populer->judul }}</a></h5>
+                        <h5><a href="{{ route('berita.tampil', $populer->slug) }}">{{ $populer->judul }}</a></h5>
                         <p>dibaca: {{ $populer->views }} kali | Tanggal:
                             {{ \Carbon\Carbon::parse($populer->tanggal)->format('d M Y') }}</p>
                     </li>
