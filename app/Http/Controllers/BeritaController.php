@@ -36,8 +36,9 @@ class BeritaController extends Controller
         if ($request->hasFile('cover')) {
             $image = $request->file('cover');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('berita'), $imageName);
-            $imagePath = "berita/" . $imageName;
+            // Simpan gambar ke folder "foto_berita" di dalam folder public
+            $image->move(public_path('foto_berita'), $imageName);
+            $imagePath = "foto_berita/" . $imageName;
         } else {
             $imagePath = 'img/default_cover_berita.jpg';
         }
@@ -80,14 +81,16 @@ class BeritaController extends Controller
         ]);
 
         if ($request->hasFile('cover')) {
+            // Hapus gambar lama jika ada dan bukan default
             if ($beritum->cover !== 'img/default_cover_berita.jpg' && File::exists(public_path($beritum->cover))) {
                 File::delete(public_path($beritum->cover));
             }
 
             $image = $request->file('cover');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('berita'), $imageName);
-            $imagePath = "berita/" . $imageName;
+            // Simpan gambar ke folder "foto_berita"
+            $image->move(public_path('foto_berita'), $imageName);
+            $imagePath = "foto_berita/" . $imageName;
         } else {
             $imagePath = $beritum->cover;
         }
