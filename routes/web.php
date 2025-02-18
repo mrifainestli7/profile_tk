@@ -12,6 +12,7 @@ use App\Http\Controllers\SesiController;
 use App\Http\Controllers\NewsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PrestasiController;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +54,10 @@ Route::get('/berita/{slug}', [NewsController::class, 'show'])->name('berita.tamp
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [SesiController::class, 'index'])->name('login');
     Route::post('/login', [SesiController::class, 'login']);
+});
+
+Route::get('/linkstorage', function () {
+    Artisan::call('storage:link');
 });
 
 Route::middleware(['auth'])->group(function () {
