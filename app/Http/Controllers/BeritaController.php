@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Berita;
+use App\Models\berita;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
 
 class BeritaController extends Controller
 {
@@ -13,7 +14,7 @@ class BeritaController extends Controller
         $query = $request->input('q');
         $data = Berita::when($query, function ($queryBuilder) use ($query) {
             return $queryBuilder->where('judul', 'like', "%{$query}%");
-        })->latest()->paginate(10); // Menampilkan 10 data per halaman
+        })->latest()->paginate(10);
 
         return view('contents.admin.berita.index', compact('data'));
     }
@@ -25,7 +26,6 @@ class BeritaController extends Controller
 
     public function store(Request $request)
     {
-        // Validasi input
         $request->validate([
             'cover' => 'nullable|image|mimes:jpeg,jpg,png,webp|max:5120',
             'judul' => 'required|string|max:255|unique:beritas,judul',
@@ -33,24 +33,22 @@ class BeritaController extends Controller
             'konten' => 'required|string',
         ]);
 
-        // Upload gambar jika ada
         if ($request->hasFile('cover')) {
             $image = $request->file('cover');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->storeAs('public/berita', $imageName);
-            $imagePath = "storage/berita/" . $imageName;
+            $image->move(public_path('berita'), $imageName);
+            $imagePath = "berita/" . $imageName;
         } else {
             $imagePath = 'img/default_cover_berita.jpg';
         }
 
-        // Simpan berita ke database dengan slug hanya di `store()`
         Berita::create([
             'cover' => $imagePath,
             'judul' => $request->judul,
-            'slug' => Str::slug($request->judul), // Slug hanya digunakan saat penyimpanan pertama
+            'slug' => Str::slug($request->judul),
             'tanggal' => $request->tanggal,
             'konten' => $request->konten,
-            'views' => 0, // Default views adalah 0
+            'views' => 0,
         ]);
 
         return redirect()->route('berita.index')->with('success', 'Berita berhasil ditambahkan.');
@@ -59,7 +57,7 @@ class BeritaController extends Controller
     public function show($id)
     {
         $berita = Berita::findOrFail($id);
-        $berita->increment('views'); // Tambah jumlah views
+        $berita->increment('views');
 
         return view('contents.berita.detail_berita', compact('berita'));
     }
@@ -74,7 +72,6 @@ class BeritaController extends Controller
     {
         $beritum = Berita::findOrFail($id);
 
-        // Validasi input
         $request->validate([
             'cover' => 'nullable|image|mimes:jpeg,jpg,png,webp|max:5120',
             'judul' => 'required|string|max:255|unique:beritas,judul,' . $beritum->id,
@@ -82,23 +79,19 @@ class BeritaController extends Controller
             'konten' => 'required|string',
         ]);
 
-        // Proses upload gambar jika ada
         if ($request->hasFile('cover')) {
-            // Hapus gambar lama jika ada dan bukan gambar default
-            if ($beritum->cover !== 'img/default_cover_berita.jpg' && file_exists(public_path($beritum->cover))) {
-                unlink(public_path($beritum->cover));
+            if ($beritum->cover !== 'img/default_cover_berita.jpg' && File::exists(public_path($beritum->cover))) {
+                File::delete(public_path($beritum->cover));
             }
 
-            // Upload gambar baru
             $image = $request->file('cover');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->storeAs('public/berita', $imageName);
-            $imagePath = "storage/berita/" . $imageName;
+            $image->move(public_path('berita'), $imageName);
+            $imagePath = "berita/" . $imageName;
         } else {
             $imagePath = $beritum->cover;
         }
 
-        // Update data berita
         $beritum->update([
             'cover' => $imagePath,
             'judul' => $request->judul,
@@ -113,12 +106,10 @@ class BeritaController extends Controller
     {
         $beritum = Berita::findOrFail($id);
 
-        // Hapus gambar jika bukan default
-        if ($beritum->cover && $beritum->cover !== 'img/default_cover_berita.jpg' && file_exists(public_path($beritum->cover))) {
-            unlink(public_path($beritum->cover));
+        if ($beritum->cover && $beritum->cover !== 'img/default_cover_berita.jpg' && File::exists(public_path($beritum->cover))) {
+            File::delete(public_path($beritum->cover));
         }
 
-        // Hapus berita dari database
         $beritum->delete();
 
         return redirect()->route('berita.index')->with('success', 'Berita berhasil dihapus.');

@@ -2,97 +2,116 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\galeri;
+use App\Models\berita;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
 
-class GaleriController extends Controller
+class BeritaController extends Controller
 {
     public function index(Request $request)
     {
         $query = $request->input('q');
-
-        $data = Galeri::when($query, function ($queryBuilder) use ($query) {
-            return $queryBuilder->where('foto_desc', 'like', "%{$query}%");
+        $data = Berita::when($query, function ($queryBuilder) use ($query) {
+            return $queryBuilder->where('judul', 'like', "%{$query}%");
         })->latest()->paginate(10);
 
-        return view('contents.admin.galeri.index', compact('data'));
+        return view('contents.admin.berita.index', compact('data'));
     }
-
 
     public function create()
     {
-        return view('contents.admin.galeri.create');
+        return view('contents.admin.berita.create');
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'foto_path' => 'required|image|mimes:jpeg,jpg,png,webp|max:5120',
-            'foto_desc' => 'required|string|max:255',
+            'cover' => 'nullable|image|mimes:jpeg,jpg,png,webp|max:5120',
+            'judul' => 'required|string|max:255|unique:beritas,judul',
+            'tanggal' => 'required|date',
+            'konten' => 'required|string',
         ]);
 
-        if ($request->hasFile('foto_path')) {
-            $image = $request->file('foto_path');
+        if ($request->hasFile('cover')) {
+            $image = $request->file('cover');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
-
-            $image->storeAs('public/galeri_foto', $imageName);
-            $imagePath = "storage/galeri_foto/" . $imageName;
+            $image->move(public_path('berita'), $imageName);
+            $imagePath = "berita/" . $imageName;
         } else {
             $imagePath = 'img/default_cover_berita.jpg';
         }
 
-        Galeri::create([
-            'foto_path' => $imagePath,
-            'foto_desc' => $request->foto_desc,
+        Berita::create([
+            'cover' => $imagePath,
+            'judul' => $request->judul,
+            'slug' => Str::slug($request->judul),
+            'tanggal' => $request->tanggal,
+            'konten' => $request->konten,
+            'views' => 0,
         ]);
 
-        return redirect()->route('galeri.index')->with('success', 'galeri berhasil ditambahkan.');
+        return redirect()->route('berita.index')->with('success', 'Berita berhasil ditambahkan.');
     }
 
-    public function edit(Galeri $galeri)
+    public function show($id)
     {
-        return view('contents.admin.galeri.edit', compact('galeri'));
+        $berita = Berita::findOrFail($id);
+        $berita->increment('views');
+
+        return view('contents.berita.detail_berita', compact('berita'));
     }
 
-    public function update(Request $request, Galeri $galeri)
+    public function edit($id)
     {
+        $beritum = Berita::findOrFail($id);
+        return view('contents.admin.berita.edit', compact('beritum'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $beritum = Berita::findOrFail($id);
+
         $request->validate([
-            'foto_path' => 'image|mimes:jpeg,jpg,png,webp|max:5120',
-            'foto_desc' => 'required|string|max:255',
+            'cover' => 'nullable|image|mimes:jpeg,jpg,png,webp|max:5120',
+            'judul' => 'required|string|max:255|unique:beritas,judul,' . $beritum->id,
+            'tanggal' => 'required|date',
+            'konten' => 'required|string',
         ]);
 
-        if ($request->hasFile('foto_path')) {
-            if ($galeri->foto_path != 'img/default_cover_berita.jpg' && file_exists(public_path($galeri->foto_path))) {
-                unlink(public_path($galeri->foto_path));
+        if ($request->hasFile('cover')) {
+            if ($beritum->cover !== 'img/default_cover_berita.jpg' && File::exists(public_path($beritum->cover))) {
+                File::delete(public_path($beritum->cover));
             }
 
-            $image = $request->file('foto_path');
+            $image = $request->file('cover');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
-
-            $image->storeAs('public/galeri_foto', $imageName);
-            $imagePath = "storage/galeri_foto/" . $imageName;
+            $image->move(public_path('berita'), $imageName);
+            $imagePath = "berita/" . $imageName;
         } else {
-            $imagePath = $galeri->foto_path;
+            $imagePath = $beritum->cover;
         }
 
-        $galeri->update([
-            'foto_path' => $imagePath,
-            'foto_desc' => $request->foto_desc,
+        $beritum->update([
+            'cover' => $imagePath,
+            'judul' => $request->judul,
+            'tanggal' => $request->tanggal,
+            'konten' => $request->konten,
         ]);
 
-        // Redirect ke halaman daftar galeri dengan pesan sukses
-        return redirect()->route('galeri.index')->with('success', 'galeri berhasil diupdate.');
+        return redirect()->route('berita.index')->with('success', 'Berita berhasil diperbarui.');
     }
 
-    public function destroy(Galeri $galeri)
+    public function destroy($id)
     {
-        // Hapus gambar jika bukan default
-        if ($galeri->foto_path && $galeri->foto_path !== 'img/default_cover_berita.jpg' && file_exists(public_path($galeri->foto_path))) {
-            unlink(public_path($galeri->foto_path));
+        $beritum = Berita::findOrFail($id);
+
+        if ($beritum->cover && $beritum->cover !== 'img/default_cover_berita.jpg' && File::exists(public_path($beritum->cover))) {
+            File::delete(public_path($beritum->cover));
         }
 
-        $galeri->delete();
+        $beritum->delete();
 
-        return redirect()->route('galeri.index')->with('success', 'galeri berhasil dihapus.');
+        return redirect()->route('berita.index')->with('success', 'Berita berhasil dihapus.');
     }
 }

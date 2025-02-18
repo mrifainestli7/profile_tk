@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Prestasi;
+use App\Models\prestasi;
 use Illuminate\Http\Request;
 
 class PrestasiController extends Controller
