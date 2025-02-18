@@ -10,7 +10,7 @@ use App\Models\kelas;
 use App\Models\mapel;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use App\Models\Prestasi;
+use App\Models\prestasi;
 
 class GuestController extends Controller
 {
