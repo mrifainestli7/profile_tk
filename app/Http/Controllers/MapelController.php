@@ -31,7 +31,7 @@ class MapelController extends Controller
     {
         $request->validate([
             'mapel_name' => 'required|string|max:255',
-            'mapel_desc' => 'required|string',          
+            'mapel_desc' => 'required|string'
         ]);
 
         Mapel::create($request->all());
