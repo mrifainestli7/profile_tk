@@ -23,6 +23,7 @@
             <thead class="table-success">
                 <tr>
                     <th scope="col">No.</th>
+                    <th scope="col">Gambar</th>
                     <th scope="col">Prestasi</th>
                     <th scope="col">Kategori Lomba</th>
                     <th scope="col">Tingkat</th>
@@ -34,6 +35,10 @@
                 @forelse ($data as $prestasi)
                 <tr>
                     <td>{{ $loop->iteration + ($data->currentPage() - 1) * $data->perPage() }}</td>
+                    <td>
+                        <img src="{{ asset($prestasi->foto_prestasi) }}" alt="Foto prestasi" class="img-fluid"
+                        style="width: 50px; height: 50px; object-fit: cover;">
+                    </td>
                     <td>{{ $prestasi->prestasi }}</td>
                     <td>{{ $prestasi->kategori_lomba }}</td>
                     <td>{{ $prestasi->tingkat }}</td>
@@ -49,7 +54,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="6" class="text-center">Belum ada data prestasi.</td>
+                    <td colspan="7" class="text-center">Belum ada data prestasi.</td>
                 </tr>
                 @endforelse
             </tbody>

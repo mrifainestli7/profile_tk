@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('prestasi', function (Blueprint $table) {
             $table->id();
+            $table->string('foto_prestasi'); 
             $table->string('prestasi'); 
             $table->string('kategori_lomba'); 
             $table->string('tingkat'); 

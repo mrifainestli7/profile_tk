@@ -22,6 +22,7 @@ class prestasi extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'foto_prestasi',
         'prestasi',
         'kategori_lomba',
         'tingkat',

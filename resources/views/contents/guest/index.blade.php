@@ -92,7 +92,7 @@
                                         {{ \Carbon\Carbon::parse($berita->tanggal)->format('d M Y') }}</p>
                                     <h4 class="card-title">{{ $berita->judul }}</h4>
                                     <p class="card-text">{!! \Illuminate\Support\Str::limit($berita->konten, 150) !!}</p>
-                                    <a href="{{ route('berita.tampil', $berita->id) }}" class="btn btn-primary btn-sm">Baca
+                                    <a href="{{ route('berita.tampil', $berita->slug) }}" class="btn btn-primary btn-sm">Baca
                                         selengkapnya</a>
                                 </div>
                             </div>

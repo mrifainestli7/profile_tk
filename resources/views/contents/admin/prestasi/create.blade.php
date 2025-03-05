@@ -15,13 +15,27 @@
       </div>
   </div>
 
-
-  
   <!-- Card to Wrap the Form -->
   <div class="card">
     <div class="card-body">
-      <form action="{{ route('prestasi.store') }}" method="POST">
+      <!-- Display Validation Errors -->
+      @if ($errors->any())
+        <div class="alert alert-danger">
+          <ul>
+            @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+            @endforeach
+          </ul>
+        </div>
+      @endif
+      
+      <!-- Form with multipart enctype for file uploads -->
+      <form action="{{ route('prestasi.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
+        <div class="mb-3">
+          <label for="foto_prestasi" class="form-label">Foto Prestasi</label>
+          <input type="file" class="form-control" id="foto_prestasi" name="foto_prestasi" accept="image/*">
+        </div>
         <div class="mb-3">
           <label for="prestasi" class="form-label">Nama Prestasi</label>
           <input type="text" class="form-control" id="prestasi" name="prestasi" required>

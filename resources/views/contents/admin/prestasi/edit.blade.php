@@ -11,35 +11,67 @@
       </ol>
     </nav>
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-1 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Ubah data Prestasi</h1>
+        <h1 class="h2">Ubah Data Prestasi</h1>
     </div>
   </div>
-  
-  <!-- Card to Wrap the Form -->
-  <div class="card">
-    <div class="card-body">
-      <form action="{{ route('prestasi.update', $prestasi->id) }}" method="POST">
-        @csrf
-        @method('PUT')
-        <div class="mb-3">
-          <label for="prestasi" class="form-label">Nama Prestasi</label>
-          <input type="text" class="form-control" id="prestasi" name="prestasi" value="{{ $prestasi->prestasi }}" required>
+
+  <!-- Menampilkan Foto Prestasi dan Form Edit Secara Horizontal -->
+  <div class="row justify-content-center">
+    <div class="col-md-3">
+      <h5>Foto Prestasi</h5>
+      <!-- Menampilkan gambar prestasi atau default jika tidak ada gambar -->
+      <a href="{{ asset($prestasi->foto_prestasi) }}" target="_blank">
+        <img src="{{ asset($prestasi->foto_prestasi) }}" alt="Foto Prestasi" class="img-fluid" style="max-width: 275px;">
+      </a>
+    </div>
+
+    <div class="col-md-8">
+      <!-- Card untuk Form Edit Data Prestasi -->
+      <div class="card">
+        <div class="card-body">
+          <!-- Display Validation Errors -->
+          @if ($errors->any())
+            <div class="alert alert-danger">
+              <ul>
+                @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+                @endforeach
+              </ul>
+            </div>
+          @endif
+
+          <form action="{{ route('prestasi.update', $prestasi->id) }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+
+            <!-- Foto Prestasi -->
+            <div class="mb-3">
+              <label for="foto_prestasi" class="form-label">Foto Prestasi</label>
+              <input type="file" class="form-control" id="foto_prestasi" name="foto_prestasi" accept="image/*">
+              <small class="text-muted">Kosongkan jika tidak ingin mengubah foto</small>
+            </div>
+
+            <div class="mb-3">
+              <label for="prestasi" class="form-label">Nama Prestasi</label>
+              <input type="text" class="form-control" id="prestasi" name="prestasi" value="{{ $prestasi->prestasi }}" required>
+            </div>
+            <div class="mb-3">
+              <label for="kategori_lomba" class="form-label">Kategori Lomba</label>
+              <input type="text" class="form-control" id="kategori_lomba" name="kategori_lomba" value="{{ $prestasi->kategori_lomba }}" required>
+            </div>
+            <div class="mb-3">
+              <label for="tingkat" class="form-label">Tingkat</label>
+              <input type="text" class="form-control" id="tingkat" name="tingkat" value="{{ $prestasi->tingkat }}" required>
+            </div>
+            <div class="mb-3">
+              <label for="tanggal" class="form-label">Tanggal Diraih</label>
+              <input type="date" class="form-control" id="tanggal" name="tanggal" value="{{ $prestasi->tanggal }}" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+            <a href="{{ route('prestasi.index') }}" class="btn btn-secondary">Kembali</a>
+          </form>
         </div>
-        <div class="mb-3">
-          <label for="kategori_lomba" class="form-label">Kategori Lomba</label>
-          <input type="text" class="form-control" id="kategori_lomba" name="kategori_lomba" value="{{ $prestasi->kategori_lomba }}" required>
-        </div>
-        <div class="mb-3">
-          <label for="tingkat" class="form-label">Tingkat</label>
-          <input type="text" class="form-control" id="tingkat" name="tingkat" value="{{ $prestasi->tingkat }}" required>
-        </div>
-        <div class="mb-3">
-          <label for="tanggal" class="form-label">Tanggal Diraih</label>
-          <input type="date" class="form-control" id="tanggal" name="tanggal" value="{{ $prestasi->tanggal }}" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Update</button>
-        <a href="{{ route('prestasi.index') }}" class="btn btn-secondary">Kembali</a>
-      </form>
+      </div>
     </div>
   </div>
 </main>
