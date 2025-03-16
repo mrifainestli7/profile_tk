@@ -14,8 +14,7 @@
                             <div class="visi">
                                 <span></span>
                                 <h4 align="center">VISI</h4>
-                                <p align="center">Mewujudkan generasi yang sehat,cerdas,kreatif,mandiri
-                                    dan berakhlak mulia serta berwawasan luas.</p>
+                                <p align="center">"Terbentuknya yang islami, berkualitas, kreatif, dan mandiiri"</p>
                             </div>
                         </div>
                     </div>
@@ -25,15 +24,16 @@
                             <div class="misi">
                                 <span></span>
                                 <h4 align="center">MISI</h4>
-                                <p align="center">Mewujudkan insan yang cerdas,ceria,mandiri dan kreatif, berdisiplin dan
-                                    bertanggung
-                                    jawab.</p>
+                                <p align="center">1. Memberikan Pembelajaran yang islami</p>
                                 <br>
-                                <p align="center">Mewujudkan pendidikan yang berkualitas,bermutu,dan bermoral dengan
-                                    meningkatkan
-                                    konpetensi guru.</p>
+                                <p align="center">2. Melaksanakan pembelajaran aktif, kreatif, inovatif, dan menyenangkan
+                                </p>
                                 <br>
-                                <p align="center">Mewujudkan sekolah yang berkualitas dalam IMPTEK dan IMTAK dasar.</p>
+                                <p align="center">3. Memberikan layanan holistik integratif</p>
+                                <br>
+                                <p align="center">
+                                    4. Menanamkan anak terbiasa mandiri</p>
+
 
                             </div>
                         </div>
@@ -44,21 +44,8 @@
                             <div class="tujuan">
                                 <span></span>
                                 <h4 align="center">TUJUAN</h4>
-                                <p align="center">Membentuk pribadi muslim yang berakhak mulia.</p>
-                                <br>
-                                <P align="center">Mewujudkan suasana TK yang kondusif.</P>
-                                <br>
-                                <p align="center">Mengasuh dan membina peserta didik dengan kasih sayang.</p>
-                                <br>
-                                <p align="center">Menyelenggarakan pendidikan yang efektif dan efesien.</p>
-                                <br>
-                                <p align="center">Mengelola proses pendidikan dan pengajaran yang berbasis karakter.</p>
-                                <br>
-                                <p align="center">enanamkan sikap disiplin kepada anak.</p>
-                                <br>
-                                <p align="center">Menanamkan pola hidup bersih dan sehat kepada anak.</p>
-                                <br>
-                                <p align="center">Menanamkan rasa kebangsaan dan kebersamaan.</p>
+                                <p align="center">"Mewujudkan anak yang islami sejak dini, berkualitas, kreatif, dan mandiri"</p>
+                               
                             </div>
                         </div>
                     </div>
@@ -67,4 +54,4 @@
 
             </div>
         </section><!-- End Why Us Section -->
-@endsection
+    @endsection

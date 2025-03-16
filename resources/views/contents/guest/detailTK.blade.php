@@ -31,6 +31,11 @@
              <tr>
               
               <td class="text-center">Tahun Berdiri</td>
+              <td class="text-center">1987</td>
+            </tr>
+            <tr>
+              
+              <td class="text-center">Tahun Izin Operasional Pertama</td>
               <td class="text-center">1990</td>
             </tr>
              <tr>

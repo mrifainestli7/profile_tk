@@ -9,7 +9,7 @@
 
                     <head>
                         <tr class="text-center">
-                            <th colspan="3" class="text-center custom-header">Mata pelajaran</th>
+                            <th colspan="3" class="text-center custom-header">Kurikulum</th>
                         </tr>
                     </head>
 

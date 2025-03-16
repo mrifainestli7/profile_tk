@@ -27,8 +27,8 @@
                     <th scope="col">Tahun Ajaran</th>
                     <th scope="col">Nama Kelas</th>
                     <th scope="col">Wali Kelas</th>
-                    <th scope="col">Jumlah Pria</th>
-                    <th scope="col">Jumlah Wanita</th>
+                    <th scope="col">Jumlah Siswa Laki-laki</th>
+                    <th scope="col">Jumlah Siswa Perempuan</th>
                     <th scope="col">Total Siswa</th>
                     <th scope="col">Aksi</th>
                 </tr>

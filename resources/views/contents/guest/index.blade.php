@@ -118,25 +118,19 @@
                     <div class="col-lg-3">
                         <ul class="nav nav-tabs flex-column">
                             <li class="nav-item">
-                                <a class="nav-link active show" data-bs-toggle="tab" href="#tab-1">Tahfidz Al Qur'an</a>
+                                <a class="nav-link active show" data-bs-toggle="tab" href="#tab-1">Iqra</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#tab-2">Menari</a>
+                                <a class="nav-link" data-bs-toggle="tab" href="#tab-4">Drumband</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#tab-3">Menggambar</a>
+                                <a class="nav-link" data-bs-toggle="tab" href="#tab-5">Melukis</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#tab-4">Menyanyi</a>
+                                <a class="nav-link" data-bs-toggle="tab" href="#tab-6">Tari</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#tab-5">Drumband</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#tab-6">Senam</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#tab-7">Anjangsana</a>
+                                <a class="nav-link" data-bs-toggle="tab" href="#tab-7">Sempoa</a>
                             </li>
                         </ul>
                     </div>
@@ -145,23 +139,51 @@
                             <div class="tab-pane active show" id="tab-1">
                                 <div class="row">
                                     <div class="col-lg-8 details order-2 order-lg-1">
-                                        <h3>Tahfidz Al-Qur'an dan Shalat Dhuha</h3>
-                                        <p class="font-italic" style="text-align: justify;">Menghafal Al Quran juga
-                                            memberi manfaat-manfaat sebagai berikut : Mempunyai pikiran yang jernih.
-                                            Terhindari dari rasa takut, sedih dan kecemasan. Kemampuan untuk membangun
-                                            hubungan sosial yang lebih baik dan memperoleh kepercayaan dari orang lain.</p>
+                                        <h3>Iqra (Wajib)</h3>
+                                        <p class="font-italic" style="text-align: justify;">Membaca dan memahami Al-Qur’an sejak dini memberikan banyak manfaat bagi perkembangan anak, seperti meningkatkan daya ingat, membentuk karakter yang baik, serta menanamkan nilai-nilai keislaman dalam kehidupan sehari-hari. Dengan semangat Iqra’, anak-anak akan tumbuh menjadi pribadi yang cinta ilmu, memiliki akhlak mulia, dan siap menghadapi masa depan dengan penuh percaya diri.</p>
                                         <p></p>
                                     </div>
                                     <div class="col-lg-4 text-center order-1 order-lg-2">
-                                        <img src="{{ asset('img/foto_tk/anaksolat.PNG') }}" alt=""
+                                        <img src="{{ asset('img/ngaji.jpg') }}" alt=""
                                             class="img-fluid">
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane" id="tab-2">
+                            <div class="tab-pane" id="tab-4">
                                 <div class="row">
                                     <div class="col-lg-8 details order-2 order-lg-1">
-                                        <h3>Menari</h3>
+                                        <h3>Drumband (wajib)</h3>
+                                        <p class="font-italic" style="text-align: justify;">melatih kemampuan memainkan alat musik juga
+                                            belajar konsep kerja sama dan sosialisasi dalam kelompok. Anak juga dilatih
+                                            untuk memahami instruksi yang diberikan. Dalam ekskul ini juga anak diajari
+                                            bagaimana berkomitmen dengan tanggung jawab yang diberikan terhadap alat musik
+                                            yang dipilihnya, guna memberikan penampilan terbaik untuk kelompok karena mereka
+                                            pastinya akan membutuhkan satu sama lain.</p>
+                                        <p></p>
+                                    </div>
+                                    <div class="col-lg-4 text-center order-1 order-lg-2">
+                                        <img src="{{ asset('img/drumband.jpg') }}" alt=""
+                                            class="img-fluid">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab-5">
+                                <div class="row">
+                                    <div class="col-lg-8 details order-2 order-lg-1">
+                                        <h3>Melukis (pilihan)</h3>
+                                        <p class="font-italic"></p>
+                                        <p style="text-align: justify;"> Melukis adalah cara anak mengekspresikan imajinasi dan perasaan melalui warna dan bentuk. Kegiatan ini tidak hanya menyenangkan, tetapi juga membantu mengembangkan kreativitas, koordinasi motorik halus, serta kemampuan berpikir visual. </p>
+                                    </div>
+                                    <div class="col-lg-4 text-center order-1 order-lg-2">
+                                        <img src="{{ asset('img/ekstrakurikulermenggambar.jpeg') }}" alt=""
+                                            class="img-fluid">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab-6">
+                                <div class="row">
+                                    <div class="col-lg-8 details order-2 order-lg-1">
+                                        <h3>Tari (pilihan)</h3>
                                         <p class="font-italic" style="text-align: justify;">Seni tari merupakan aktivitas
                                             yang cocok untuk melatih kecerdasan kinestetik serta mengembangkan nilai-nilai
                                             estetika dan melatih koordinasi antara bakat musikal dengan olah tubuh Siswa
@@ -175,85 +197,15 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane" id="tab-3">
-                                <div class="row">
-                                    <div class="col-lg-8 details order-2 order-lg-1">
-                                        <h3>Menggambar</h3>
-                                        <p class="font-italic" style="text-align: justify;">Suatu bentuk upaya melatih dan
-                                            mengembangkan kemampuan anak untuk berekspresi dengan media gambar secara baik
-                                            dan benar.Dan untuk kedepannya anak mampu melahirkan karya karya yang
-                                            membanggakan dan bermanfaat untuk masyarakat luas.</p>
-                                        <p></p>
-                                    </div>
-                                    <div class="col-lg-4 text-center order-1 order-lg-2">
-                                        <img src="{{ asset('img/ekstrakurikulermenggambar.jpeg') }}" alt=""
-                                            class="img-fluid">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane" id="tab-4">
-                                <div class="row">
-                                    <div class="col-lg-8 details order-2 order-lg-1">
-                                        <h3>Menyayi</h3>
-                                        <p class="font-italic" style="text-align: justify;">Dengan menyanyi diharapkan
-                                            dapat membina dan mengembangkan mental dan keyakinan diri anak dalam bidang olah
-                                            vokal dan kepercayaan diri tampil dimuka umum dan meningkatkan sosio emosional
-                                            anak dan adaptasi dan kerjasama 1 group olah vokal ketika harus tampil
-                                            bersama-sama.</p>
-                                        <p></p>
-                                    </div>
-                                    <div class="col-lg-4 text-center order-1 order-lg-2">
-                                        <img src="{{ asset('img/ekstrakurikulermenyanyi.jpg') }}" alt=""
-                                            class="img-fluid">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane" id="tab-5">
-                                <div class="row">
-                                    <div class="col-lg-8 details order-2 order-lg-1">
-                                        <h3>Drumband</h3>
-                                        <p class="font-italic"></p>
-                                        <p style="text-align: justify;"> melatih kemampuan memainkan alat musik juga
-                                            belajar konsep kerja sama dan sosialisasi dalam kelompok. Anak juga dilatih
-                                            untuk memahami instruksi yang diberikan. Dalam ekskul ini juga anak diajari
-                                            bagaimana berkomitmen dengan tanggung jawab yang diberikan terhadap alat musik
-                                            yang dipilihnya, guna memberikan penampilan terbaik untuk kelompok karena mereka
-                                            pastinya akan membutuhkan satu sama lain. </p>
-                                    </div>
-                                    <div class="col-lg-4 text-center order-1 order-lg-2">
-                                        <img src="{{ asset('img/ekstrakurikulerdrumband.PNG') }}" alt=""
-                                            class="img-fluid">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane" id="tab-6">
-                                <div class="row">
-                                    <div class="col-lg-8 details order-2 order-lg-1">
-                                        <h3>Senam</h3>
-                                        <p class="font-italic" style="text-align: justify;">Gerakan senam khusus bisa
-                                            memperkuat otot punggung dan perut. Dengan demikian, anak akan lebih aktif dalam
-                                            bergerak dan melompat. Namun, gerakan senam harus disesuaikan dengan usia dan
-                                            tingkat kemampuan si kecil.</p>
-                                        <p></p>
-                                    </div>
-                                    <div class="col-lg-4 text-center order-1 order-lg-2">
-                                        <img src="{{ asset('img/ekstrakurikulersenam.jpg') }}" alt=""
-                                            class="img-fluid">
-                                    </div>
-                                </div>
-                            </div>
                             <div class="tab-pane" id="tab-7">
                                 <div class="row">
                                     <div class="col-lg-8 details order-2 order-lg-1">
-                                        <h3>Anjangsana</h3>
-                                        <p class="font-italic" style="text-align: justify;">Kunjungan ke suatu tempat
-                                            untuk menjalin siltaurrahmi sekaligus umtuk menambah wawasan dan pengetahuan
-                                            anak terhadap lingkungan, dan biasanya kegiatan ini tergantung event atau
-                                            momen-momen tertentu saja.</p>
+                                        <h3>Sempoa (pilihan)</h3>
+                                        <p class="font-italic" style="text-align: justify;">Sempoa adalah metode berhitung yang tidak hanya melatih kemampuan matematika anak, tetapi juga mengembangkan kecerdasan logis dan daya konsentrasi. Dengan berlatih sempoa sejak dini, anak-anak dapat meningkatkan ketajaman berpikir, kecepatan berhitung, serta koordinasi antara tangan dan otak.</p>
                                         <p></p>
                                     </div>
                                     <div class="col-lg-4 text-center order-1 order-lg-2">
-                                        <img src="{{ asset('img/ekstrakurikuleranjangsana.jpg') }}" alt=""
+                                        <img src="{{ asset('img/sempoa.jpg') }}" alt=""
                                             class="img-fluid">
                                     </div>
                                 </div>

@@ -34,11 +34,11 @@
           <input type="text" class="form-control" id="homeroom_teacher" name="homeroom_teacher" value="{{ $kela->homeroom_teacher }}" required>
         </div>
         <div class="mb-3">
-          <label for="pria" class="form-label">Jumlah Siswa Pria</label>
+          <label for="pria" class="form-label">Jumlah Siswa Laki-lakia</label>
           <input type="number" class="form-control" id="pria" name="pria" value="{{ $kela->pria }}" required>
         </div>
         <div class="mb-3">
-          <label for="wanita" class="form-label">Jumlah Siswa Wanita</label>
+          <label for="wanita" class="form-label">Jumlah Siswa Perempuan</label>
           <input type="number" class="form-control" id="wanita" name="wanita" value="{{ $kela->wanita }}" required>
         </div>
         <!-- Tidak ada input untuk total, karena akan dihitung di controller -->

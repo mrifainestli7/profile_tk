@@ -1,13 +1,4 @@
-/**
-* Template Name: Restaurantly - v3.0.1
-* Template URL: https://bootstrapmade.com/restaurantly-restaurant-template/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
 
-/*--------------------------------------------------------------
-# General
---------------------------------------------------------------*/
 body {
   font-family: "Open Sans", sans-serif;
   background: rgb(213, 241, 207);
@@ -892,7 +883,7 @@ section {
 
 div .visi { 
 
-  height: 550px;
+  height: 350px;
 }
 
 div .visi p {
@@ -900,7 +891,7 @@ div .visi p {
 }
 
 div .misi {
-  height: 550px;
+  height: 350px;
 }
 
 div .misi p {
@@ -908,7 +899,7 @@ div .misi p {
  }
 
 div .tujuan {
-  height: 550px;
+  height: 350px;
 }
 
 div .tujuan p {
