@@ -50,6 +50,7 @@
                             <li><a href="/visi_misi">Visi & misi kami</a></li>
                             <li><a href="/detail_TK">Identitas Sekolah</a></li>
                             <li><a href="/daftar_guru">Daftar Guru</a></li>
+                            <li><a href="/daftar_pegawai">Daftar Pegawai</a></li>
                             <li><a href="/struktur_TK">Struktur Sekolah</a></li>
                         </ul>
                     </li>

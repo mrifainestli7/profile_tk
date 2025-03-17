@@ -12,33 +12,35 @@
                             <th scope="col">NO</th>
                             <th scope="col">Foto</th>
                             <th scope="col">Nama</th>
-                            <th scope="col">Status Guru</th>
+                            <th scope="col">Tugas</th>
+                            <th scope="col">Status Pegawai</th>
                             <th scope="col">Pendidikan</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($data as $index => $guru)
+                        @foreach ($data as $index => $pegawai)
                             <tr>
                                 <td>{{ $index + 1 }}.</td>
                                 <td>
-                                    <img src="{{ asset($guru->pfp_path) }}" alt="Foto {{ $guru->name }}" class="img-fluid"
+                                    <img src="{{ asset($pegawai->pfp_path) }}" alt="Foto {{ $pegawai->name }}" class="img-fluid"
                                         style="width: 50px; height: 50px; object-fit: cover;">
                                 </td>
-                                <td>{{ $guru->name }}</td>
-                                @if ($guru->status == 'GTY')
-                                    <td> Guru Tetap Yayasan (GTY)</td>
-                                @elseif ($guru->status == 'GTT')
-                                    <td> Guru Tetap Tenaga Honorer (GTT)</td>
+                                <td>{{ $pegawai->name }}</td>
+                                <td>{{ $pegawai->task }}</td>
+                                @if ($pegawai->status == 'PTY')
+                                    <td>Pegawai Tetap Yayasan (PTY)</td>
+                                @elseif ($pegawai->status == 'PTT')
+                                    <td>Pegawai Tetap Tenaga Honorer (PTT)</td>
                                 @else
-                                    {{ $guru->status }} <!-- Fallback in case status is neither GTY nor GTT -->
+                                    <td>{{ $pegawai->status }}</td> <!-- Fallback jika status tidak sesuai -->
                                 @endif
-                                <td>{{ $guru->qualification }}</td>
+                                <td>{{ $pegawai->qualification }}</td>
                             </tr>
                         @endforeach
 
                         @if ($data->isEmpty())
                             <tr>
-                                <td colspan="6" class="text-center">Belum ada data guru.</td>
+                                <td colspan="5" class="text-center">Belum ada data pegawai.</td>
                             </tr>
                         @endif
                     </tbody>

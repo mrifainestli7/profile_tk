@@ -8,9 +8,11 @@ use App\Models\galeri;
 use App\Models\guru;
 use App\Models\kelas;
 use App\Models\mapel;
+use App\Models\pegawai;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\prestasi;
+use App\Models\struktur;
 
 class GuestController extends Controller
 {
@@ -45,7 +47,8 @@ class GuestController extends Controller
     }
 
     function struktur() : View {
-        return view('contents.guest.struktur');
+        $data = struktur::all()->first();;
+        return view('contents.guest.struktur', compact('data'));
     }
 
     function visi_misi() : View {
@@ -59,6 +62,11 @@ class GuestController extends Controller
     function daftar_guru() : View {
         $data = Guru::all();
         return view('contents.guest.daftar_guru', compact('data'));
+    }
+
+    function daftar_pegawai() : View {
+        $data = pegawai::all();
+        return view('contents.guest.daftar_pegawai', compact('data'));
     }
 
     function daftar_kelas() : View {

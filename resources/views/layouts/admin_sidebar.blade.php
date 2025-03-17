@@ -26,9 +26,21 @@
           </a>
         </li>
         <li class="nav-item">
+          <a class="nav-link {{ Request::is('admin/pegawai*') ? 'active' : '' }}" href="{{ route('pegawai.index') }}" href="{{ route('pegawai.index') }}">
+            <span data-feather="users" class="align-text-bottom"></span>
+            Pegawai
+          </a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link {{ Request::is('admin/kelas*') ? 'active' : '' }}" href="{{ route('kelas.index') }}" href="{{ route('kelas.index') }}">
             <span data-feather="users" class="align-text-bottom"></span>
             Kelas
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {{ Request::is('admin/struktur*') ? 'active' : '' }}" href="{{ route('struktur.index') }}" href="{{ route('struktur.index') }}">
+            <span data-feather="book" class="align-text-bottom"></span>
+            Struktur TK
           </a>
         </li>
         <li class="nav-item">

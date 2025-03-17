@@ -6,7 +6,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-10 text-center">
                 <br>
-                <img src="{{ asset('img/strukturtk.png') }}" alt="" class="img-fluid mx-auto d-block" style="max-width: 100%;">
+                <img src="{{ asset($data->image_path) }}" alt="" class="img-fluid mx-auto d-block" style="max-width: 100%;">
             </div>
         </div>
     </div>

@@ -10,8 +10,10 @@ use App\Http\Controllers\KelasController;
 use App\Http\Controllers\MapelController;
 use App\Http\Controllers\SesiController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\PegawaiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PrestasiController;
+use App\Http\Controllers\StrukturController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +34,7 @@ Route::get('/visi_misi', [GuestController::class, 'visi_misi']);
 Route::get('/sejarah', [GuestController::class, 'sejarah']);
 Route::get('/galeri', [GuestController::class, 'galeri']);
 Route::get('/daftar_guru', [GuestController::class, 'daftar_guru']);
+Route::get('/daftar_pegawai', [GuestController::class, 'daftar_pegawai']);
 Route::get('/daftar_kelas', [GuestController::class, 'daftar_kelas']);
 Route::get('/alamat', [GuestController::class, 'alamat']);
 
@@ -63,7 +66,9 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('prestasi', PrestasiController::class);
         Route::resource('mapel', MapelController::class);
         Route::resource('guru', GuruController::class);
+        Route::resource('pegawai', PegawaiController::class);
         Route::resource('kelas', KelasController::class);
+        Route::resource('struktur', StrukturController::class);
         Route::resource('link_form_pendaftaran', FormPendaftaranController::class);
 
         // Route Berita untuk Admin
